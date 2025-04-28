@@ -13,10 +13,19 @@
 # and
 #   about_triangle_project_2.rb
 #
-def triangle(a, b, c)
-  # WRITE THIS CODE
-end
+class TriangleError < StandardError; end
 
-# Error class used in part 2.  No need to change this code.
-class TriangleError < StandardError
+def triangle(a, b, c)
+  # Проверка на невалидные треугольники
+  raise TriangleError if a <= 0 || b <= 0 || c <= 0
+  raise TriangleError if a + b <= c || a + c <= b || b + c <= a
+
+  # Определение типа треугольника
+  if a == b && b == c
+    :equilateral
+  elsif a == b || a == c || b == c
+    :isosceles
+  else
+    :scalene
+  end
 end
